@@ -1,0 +1,51 @@
+-- 3. Create a table for Books
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY,
+    Title VARCHAR(255),
+    Author VARCHAR(255),
+    ISBN VARCHAR(20),
+    PublishedYear INT,
+    AvailableCopies INT
+);
+
+-- 4. Create a table for Members
+CREATE TABLE Members (
+    MemberID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Email VARCHAR(255),
+    PhoneNumber VARCHAR(15),
+    MembershipDate DATE
+);
+
+-- 5. Create a table for BookLoans
+CREATE TABLE BookLoans (
+    LoanID INT PRIMARY KEY,
+    BookID INT,
+    MemberID INT,
+    LoanDate DATE,
+    ReturnDate DATE,
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
+-- 6. Insert sample data into Books
+INSERT INTO Books (BookID, Title, Author, ISBN, PublishedYear, AvailableCopies) VALUES
+(1, 'Rich Dad Poor Dad', 'Robert T. Kiyosaki', '978-1-61268-019', 1997, 15),
+(2, 'Atomic Habits', 'James Clear', '978-1-84-794183-1', 2000, 25),
+(3, 'Chanakyaniti', 'Goyal Publications', '978-8-8195098019', 1970, 17),
+(4, 'Regretting You', 'Colleen Hoover', '978-1542016421', 2019, 17),
+(5, 'The Secret', 'Rhonda Byrne', '978-1-4711-7239-7', 2006, 35),
+(6, 'Verity', 'Colleen Hoover', '978-1-4087-2660-0', 2018, 8);
+-- 7. Insert sample data into Members
+INSERT INTO Members (MemberID, Name, Email, PhoneNumber, MembershipDate) VALUES
+(101, 'Snehal Nale', 'nalesnehal2003@gmail.com', '9545141614', '2022-01-15'),
+(102, 'Sayali', 'justsayali@gmail.com', '7880452167', '2022-02-10');
+-- 8. Insert sample data into BookLoans
+INSERT INTO BookLoans (LoanID, BookID, MemberID, LoanDate, ReturnDate) VALUES
+(1101, 1, 101, '2024-08-01', '2024-08-10'),
+(1102, 2, 102, '2024-08-05', '2024-08-12');
+
+
+
+-- 9. Query to check available books
+SELECT * FROM Books WHERE AvailableCopies > 0;
+
